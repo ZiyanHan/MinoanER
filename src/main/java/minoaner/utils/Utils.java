@@ -203,13 +203,16 @@ public class Utils {
      */
     public static SparkSession setUpSpark(String appName, int NUM_CORES_IN_CLUSTER, int NUM_WORKERS, int parallelismFactor, String tmpPath) {
         final int NUM_EXECUTORS = NUM_WORKERS * 2; //standard: NUM_WORKERS *3
+        // final int NUM_EXECUTORS = NUM_WORKERS; //standard: NUM_WORKERS *3
         final int NUM_EXECUTOR_CORES = NUM_CORES_IN_CLUSTER/NUM_EXECUTORS;
         final int PARALLELISM = NUM_EXECUTORS * NUM_EXECUTOR_CORES * parallelismFactor;
                        
         return SparkSession.builder()
+            .master("local") //
             .appName(appName) 
             .config("spark.sql.warehouse.dir", tmpPath)
-            .config("spark.eventLog.enabled", true)
+            // .config("spark.eventLog.enabled", true)
+            .config("spark.eventLog.enabled", false)
             .config("spark.default.parallelism", PARALLELISM) //x tasks for each core --> x "reduce" rounds (keep this fixed for speedup tests), oherwise (set: PARALLELISM)
             .config("spark.rdd.compress", true)
             .config("spark.network.timeout", "800s")

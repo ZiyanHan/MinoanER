@@ -67,7 +67,8 @@ public class Main {
             entityIds2 = "";
             outputPath = "/file:C:\\Users\\VASILIS\\Documents\\OAEI_Datasets\\exportedBlocks\\testOutput";            
         } else if (args.length >= 6) {            
-            tmpPath = "/file:/tmp";
+            //tmpPath = "/file:/tmp";
+			tmpPath = "/home/ubuntu/hanzy/MinoanER/datasets/bbcMusic";
             //master = "spark://master:7077";
             inputPath = args[0];
             inputTriples1 = args[1];
@@ -76,12 +77,13 @@ public class Main {
             entityIds2 = args[4];
             outputPath = args[5];
             
+            // 手动删除输出文件的位置！！！            
             // delete existing output directories
-            try {                                
-                Utils.deleteHDFSPath(outputPath);
-            } catch (IOException | URISyntaxException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            // try {                                
+                // Utils.deleteHDFSPath(outputPath);
+            // } catch (IOException | URISyntaxException ex) {
+                // Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            // }
         } else {
             System.out.println("You can run Metablocking with the following arguments:"
                     + "0: inputBlocking" 
@@ -94,7 +96,8 @@ public class Main {
         }
         
         String appName = "Running MinoanER on "+inputPath.substring(inputPath.lastIndexOf("/", inputPath.length()-2)+1);
-        SparkSession spark = Utils.setUpSpark(appName, 288, 8, 3, tmpPath);
+        //SparkSession spark = Utils.setUpSpark(appName, 288, 8, 3, tmpPath);
+	SparkSession spark = Utils.setUpSpark(appName, 2, 1, 1, tmpPath);
         int PARALLELISM = spark.sparkContext().getConf().getInt("spark.default.parallelism", 144);        
         JavaSparkContext jsc = JavaSparkContext.fromSparkContext(spark.sparkContext()); 
                        

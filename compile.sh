@@ -9,6 +9,8 @@ ENTITYID_PATH1=$DATASETS_PATH/bbcMusic/bbc-musicIds.txt
 ENTITYID_PATH2=$DATASETS_PATH/bbcMusic/bbc-musicIds.txt
 OUTPUT_PATH=$DATASETS_PATH/bbcMusic/Output
 
+rm -rf $OUTPUT_PATH
+
 # Build the project.
 echo "build start..."
 mvn compile

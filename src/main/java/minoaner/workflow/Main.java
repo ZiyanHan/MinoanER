@@ -68,7 +68,7 @@ public class Main {
             outputPath = "/file:C:\\Users\\VASILIS\\Documents\\OAEI_Datasets\\exportedBlocks\\testOutput";            
         } else if (args.length >= 6) {            
             //tmpPath = "/file:/tmp";
-			tmpPath = "/home/ubuntu/hanzy/MinoanER/datasets/bbcMusic";
+	    tmpPath = "/home/ubuntu/hanzy/datasets/bbcMusic";
             //master = "spark://master:7077";
             inputPath = args[0];
             inputTriples1 = args[1];
